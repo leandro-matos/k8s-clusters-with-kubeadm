@@ -15,7 +15,8 @@
 
 ### Comandos:
 
-HaProxy:
+* HaProxy:
+```
 hostname nomedaquina
 echo "nomedaquina" > /etc/hostname
 bash
@@ -38,10 +39,10 @@ backend k8s-masters
         server k8s-master-3 172.31.78.9:6443 check fall 3 rise 2
 		
 systemctl restart haproxy
+```
 
-====================================================
-
-k8s-master (1, 2, 3) e Workers (1,2,3)
+*k8s-master (1, 2, 3) e Workers (1,2,3)
+```
 hostname nomedaquina
 echo "nomedaquina" > /etc/hostname
 bash
@@ -60,19 +61,21 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 * Incluindo DNS
 echo "172.31.76.236 haproxy" >> /etc/hosts
+```
 
-====================================================
 
 * No Master01
+```
 kubeadm init --control-plane-endpoint "haproxy:6443" --upload-certs
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
 
-====================================================
 
 * No Master02 e Master03 rodar o kubeadmjoin control-plane e depois adicionar o path do kubelet
+```
 kubeadm join haproxy:6443 --token 0dcswp.djkga4qe1autjudl \
         --discovery-token-ca-cert-hash sha256:993e8ea96c1e2ed5f3bff9eba99168476fa83db73d9c58b40a07d74a858865c8 \
         --control-plane --certificate-key b79b28bc8d4b24c14cafa23d6d733ec3e4ac2169a0df04db9710a810b4891f38
@@ -80,19 +83,17 @@ kubeadm join haproxy:6443 --token 0dcswp.djkga4qe1autjudl \
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
-====================================================
 
 * Nos Workers:
+```
 kubeadm join haproxy:6443 --token ln8jo5.zwxkyrmbi3hgcfqv --discovery-token-ca-cert-hash sha256:993e8ea96c1e2ed5f3bff9eba99168476fa83db73d9c58b40a07d74a858865c8
-
-====================================================
+```
 
 * Nos Masters:
-
+```
 kubectl get nodes
 kubectl get all --all-namespaces
-
-====================================================
-
+```
 
