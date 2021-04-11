@@ -8,9 +8,15 @@
 
 
 ### Links Importantes: 
-* Tipos de topologias de K8s multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/
-* Instalação kubeadm, kubelet e kubectl: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-* Instalação Kubernetes multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
+* Tipos de topologias de K8s multi-master: 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/
+
+* Instalação kubeadm, kubelet e kubectl: 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+* Instalação Kubernetes multi-master: 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
+
 * HAproxy: https://www.haproxy.org/
 
 ### Comandos:
@@ -41,7 +47,7 @@ backend k8s-masters
 systemctl restart haproxy
 ```
 
-*k8s-master (1, 2, 3) e Workers (1,2,3)
+* k8s-master (1, 2, 3) e Workers (1,2,3)
 ```
 hostname nomedaquina
 echo "nomedaquina" > /etc/hostname
