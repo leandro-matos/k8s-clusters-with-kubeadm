@@ -8,16 +8,16 @@
 
 
 ### Links Importantes: 
-* Tipos de topologias de K8s multi-master: 
+#### Tipos de topologias de K8s multi-master: 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/
 
-* Instalação kubeadm, kubelet e kubectl: 
+#### Instalação kubeadm, kubelet e kubectl: 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
-* Instalação Kubernetes multi-master: 
+#### Instalação Kubernetes multi-master: 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
 
-* HAproxy: https://www.haproxy.org/
+#### HAproxy: https://www.haproxy.org/
 
 ### Comandos:
 
