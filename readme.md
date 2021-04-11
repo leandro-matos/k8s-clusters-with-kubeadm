@@ -2,16 +2,16 @@
 
 ### Setup com 07 máquinas:
 
-#### 03 Masters
-#### 03 Workers
-#### 01 HaProxy
+* 03 Masters
+* 03 Workers
+* 01 HaProxy
 
 
 ### Links Importantes: 
-Tipos de topologias de K8s multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/
-Instalação kubeadm, kubelet e kubectl: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-Instalação Kubernetes multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
-HAproxy: https://www.haproxy.org/
+* Tipos de topologias de K8s multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/
+* Instalação kubeadm, kubelet e kubectl: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+* Instalação Kubernetes multi-master: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/
+* HAproxy: https://www.haproxy.org/
 
 ### Comandos:
 
@@ -39,7 +39,7 @@ backend k8s-masters
 		
 systemctl restart haproxy
 
-=======================================================================================================================
+====================================================
 
 k8s-master (1, 2, 3) e Workers (1,2,3)
 hostname nomedaquina
@@ -61,7 +61,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 * Incluindo DNS
 echo "172.31.76.236 haproxy" >> /etc/hosts
 
-=======================================================================================================================
+====================================================
 
 * No Master01
 kubeadm init --control-plane-endpoint "haproxy:6443" --upload-certs
@@ -70,7 +70,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
-=======================================================================================================================
+====================================================
 
 * No Master02 e Master03 rodar o kubeadmjoin control-plane e depois adicionar o path do kubelet
 kubeadm join haproxy:6443 --token 0dcswp.djkga4qe1autjudl \
@@ -81,18 +81,18 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-=======================================================================================================================
+====================================================
 
 * Nos Workers:
 kubeadm join haproxy:6443 --token ln8jo5.zwxkyrmbi3hgcfqv --discovery-token-ca-cert-hash sha256:993e8ea96c1e2ed5f3bff9eba99168476fa83db73d9c58b40a07d74a858865c8
 
-=======================================================================================================================
+====================================================
 
 * Nos Masters:
 
 kubectl get nodes
 kubectl get all --all-namespaces
 
-=======================================================================================================================
+====================================================
 
 
